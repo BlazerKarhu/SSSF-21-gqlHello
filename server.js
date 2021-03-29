@@ -16,7 +16,7 @@ import express from 'express';
 
     app.listen({port: 3000}, () =>
       console.log(
-        `🚀 Server ready at http://localhost:3000${server.graphqlPath}`
+        `🚀 Server ready at http://localhost:3000${server.graphqlPath}ql`
       )
     );
   } catch (e) {
