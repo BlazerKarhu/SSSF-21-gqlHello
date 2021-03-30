@@ -12,5 +12,6 @@ export default gql`
   }
   extend type Mutation {
     addAnimal(animalName: String!, species: ID!): Animal
+    modifyAnimal(id: ID!, animalName: String!, species: ID!): Animal
   }
 `;
