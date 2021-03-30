@@ -4,9 +4,7 @@ export default {
   Animal: {
     species(parent) {
       console.log('species', parent);
-      return speciesData
-        .filter((species) => species.id === parent.species)
-        .pop();
+      return Species.findById(parent.species);
     },
   },
   Mutation: {
