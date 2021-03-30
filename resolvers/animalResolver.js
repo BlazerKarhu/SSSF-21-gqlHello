@@ -20,5 +20,8 @@ export default {
       };
       return Animal.findByIdAndUpdate(args.id, data);
     },
+    deleteAnimal: (parent, args) => {
+      return Animal.findOneAndDelete(args.id);
+    },
   },
 };
