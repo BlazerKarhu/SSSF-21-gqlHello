@@ -1,12 +1,12 @@
-import Animal from '../models/animal.js';
+import Station from '../models/station.js';
 
 export default {
   Query: {
-    animals: () => {
-      return Animal.find();
+    stations: () => {
+      return Station.find();
     },
-    animal: (parent, args) => {
-      return Animal.findById(args.id);
+    station: (parent, args) => {
+      return Station.findById(args.id);
     },
   },
   Mutation: {
