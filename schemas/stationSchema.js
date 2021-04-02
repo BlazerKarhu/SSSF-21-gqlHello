@@ -10,10 +10,10 @@ export default gql`
     id: ID
     Title: String
     Town: String
-    AddressLinel: String
+    AddressLine1: String
     StateOrProvince: String
     Postcode: String
-    Location: [String]
-    Connections: Connection
+    Location: Location
+    Connections: [Connection]
   }
 `;

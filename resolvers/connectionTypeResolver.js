@@ -1,10 +1,10 @@
 import ConnectionType from '../models/connectionType.js';
 
 export default {
-  Station: {
-    Connections(parent) {
+  Connection: {
+    ConnectionTypeID(parent) {
       console.log('connectionType', parent);
-      return ConnectionType.findById(parent.Connections);
+      return ConnectionType.findById(parent.ConnectionTypeID);
     },
   },
 };

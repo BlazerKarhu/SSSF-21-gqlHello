@@ -4,8 +4,8 @@ export default gql`
   type Connection {
     id: ID
     Quantity: String
-    ConnectionType: ConnectionType
-    CurrentType: CurrentType
-    LevelType: Levels
+    ConnectionTypeID: ConnectionType
+    CurrentTypeID: CurrentType
+    LevelID: Levels
   }
 `;

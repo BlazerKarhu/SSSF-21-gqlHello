@@ -9,6 +9,7 @@ import currentTypeSchema from './currentTypeSchema.js';
 import levelsSchema from './levelsSchema.js';
 
 import {gql} from 'apollo-server-express';
+import locationSchema from './locationSchema.js';
 
 const linkSchema = gql`
   type Query {
@@ -29,4 +30,5 @@ export default [
   connectionTypeSchema,
   currentTypeSchema,
   levelsSchema,
+  locationSchema,
 ];

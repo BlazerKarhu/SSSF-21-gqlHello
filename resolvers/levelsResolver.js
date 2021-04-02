@@ -2,7 +2,7 @@ import Levels from '../models/levels.js';
 
 export default {
   Connection: {
-    LevelType(parent) {
+    LevelID(parent) {
       console.log('species', parent);
       return Levels.findById(parent.LevelType);
     },
