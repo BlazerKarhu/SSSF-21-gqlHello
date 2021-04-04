@@ -18,5 +18,6 @@ export default gql`
   }
   extend type Mutation {
     addStation(stationName: String!, Connections: [ID!]): Station
+    deleteStation(id: ID!): Station
   }
 `;

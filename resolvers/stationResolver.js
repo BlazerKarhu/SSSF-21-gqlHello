@@ -95,5 +95,8 @@ export default {
       const newStation = new Station(args);
       return newStation.save();
     },
+    deleteStation: (parent, args) => {
+      return Station.findOneAndDelete(args.id);
+    },
   },
 };
