@@ -1,7 +1,3 @@
-import animalSchema from './animalSchema.js';
-import categorySchema from './categorySchema.js';
-import speciesSchema from './speciesSchema.js';
-
 import stationSchema from './stationSchema.js';
 import connectionSchema from './connectionSchema.js';
 import connectionTypeSchema from './connectionTypeSchema.js';
@@ -23,9 +19,6 @@ const linkSchema = gql`
 export default [
   linkSchema,
   stationSchema,
-  animalSchema,
-  categorySchema,
-  speciesSchema,
   connectionSchema,
   connectionTypeSchema,
   currentTypeSchema,

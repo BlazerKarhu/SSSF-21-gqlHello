@@ -12,11 +12,4 @@ export default {
       return Levels.findById(parent.LevelType);
     },
   },
-  Mutation: {
-    addSpecies: (parent, args) => {
-      console.log('levelsResolver, addLevels', args);
-      const newSpecies = new Levels(args);
-      return newSpecies.save();
-    },
-  },
 };

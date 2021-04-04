@@ -4,15 +4,7 @@ import rectangleBounds from '../helper/rectangleBounds.js';
 
 export default {
   Query: {
-    stations: async (
-      parent,
-      args,
-      bounds,
-      start,
-      topRight,
-      bottomLeft,
-      req
-    ) => {
+    stations: async (parent, args, topRight, bottomLeft) => {
       try {
         let start;
         if (start) start = +args.start;
@@ -33,7 +25,7 @@ export default {
           }).populate({
             path: 'Connections',
             populate: [
-              {path: 'ConnectionType'},
+              {path: 'ConnectionType'}, //weird problem with this line. should work as ConnectionTypeID but does not.
               {path: 'CurrentTypeID'},
               {path: 'LevelID'},
             ],
@@ -45,7 +37,7 @@ export default {
             .populate({
               path: 'Connections',
               populate: [
-                {path: 'ConnectionType'},
+                {path: 'ConnectionType'}, //weird problem with this line. should work as ConnectionTypeID but does not.
                 {path: 'CurrentTypeID'},
                 {path: 'LevelID'},
               ],
@@ -59,7 +51,7 @@ export default {
       return Station.findById(args.id).populate({
         path: 'Connections',
         populate: [
-          {path: 'ConnectionType'},
+          {path: 'ConnectionType'}, //weird problem with this line. should work as ConnectionTypeID but does not.
           {path: 'CurrentTypeID'},
           {path: 'LevelID'},
         ],
