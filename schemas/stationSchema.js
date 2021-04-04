@@ -2,7 +2,7 @@ import {gql} from 'apollo-server-express';
 
 export default gql`
   extend type Query {
-    stations: [Station]
+    stations(bounds: [String], start: Int, limit: Int): [Station]
     station(id: ID!): Station
   }
 
@@ -15,5 +15,8 @@ export default gql`
     Postcode: String
     Location: Location
     Connections: [Connection]
+  }
+  extend type Mutation {
+    addStation(stationName: String!, Connections: [ID!]): Station
   }
 `;
