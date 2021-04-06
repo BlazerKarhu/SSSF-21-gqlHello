@@ -11,6 +11,7 @@ export default {
         return {
           id: authResponse.user.id,
           username: authResponse.user.username,
+          token: authResponse.token,
         };
       } catch (error) {
         throw new AuthenticationError(error.message);
