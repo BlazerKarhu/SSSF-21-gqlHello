@@ -11,10 +11,10 @@ export default {
         let limit = 10;
         if (limit) limit = +args.limit;
         let stations = [];
-        if (args.topRight && args.bottomLeft) {
+        if (args.bounds) {
           const mapBounds = rectangleBounds(
-            JSON.parse(topRight),
-            JSON.parse(bottomLeft)
+            args.bounds._northEast,
+            args.bounds._southWest
           );
           stations = await Station.find({
             Location: {
@@ -32,7 +32,7 @@ export default {
           });
         } else {
           return Station.find()
-            .skip(start)
+            .skip(args.start)
             .limit(args.limit)
             .populate({
               path: 'Connections',
@@ -50,44 +50,39 @@ export default {
     station: (parent, args) => {
       return Station.findById(args.id).populate({
         path: 'Connections',
-        populate: [
-          {path: 'ConnectionType'}, //weird problem with this line. should work as ConnectionTypeID but does not.
-          {path: 'CurrentTypeID'},
-          {path: 'LevelID'},
-        ],
+        populate: {
+          path: 'ConnectionType CurrentTypeID LevelID',
+        },
       });
     },
   },
   Mutation: {
     addStation: async (parent, args) => {
       try {
-        console.log('posting station', args.body);
-        const connectioners = args.body.connections;
-        const newConnections = await Promise.all(
-          connectioners.map(async (conn) => {
-            let newConnection = new Connection(args);
-            const result = await newConnection(save);
-            return result.save();
+        const conns = await Promise.all(
+          args.Connections.map(async (conn) => {
+            let newConnection = new Connection(conn);
+            const result = await newConnection.save();
+            return result._id;
           })
         );
-        console.log('nc', newConnections);
 
-        const station = args.body.Station;
-        station.Connections = newConnections;
-        station.Location.type = 'Point';
-
-        console.log('st', station);
-        const newStation = new Station(station);
-        console.log('ns', newStation);
-        const rslt = await newStation.save();
+        let newStation = new Station({
+          ...args,
+          Connections: conns,
+        });
+        return newStation.save();
       } catch (error) {
         console.error(error);
       }
-      console.log('stationResolver, addStation', args);
-      const newStation = new Station(args);
-      return newStation.save();
     },
     deleteStation: (parent, args) => {
+      //const stat = await Station.findById(args.id);
+      //const delResult = await Promise.all(
+      //  stat.Connections.map(async (conn)=>{
+      //    return Connection.findByIdAndDelete(delResult)
+      //  })
+      //)
       return Station.findOneAndDelete(args.id);
     },
   },

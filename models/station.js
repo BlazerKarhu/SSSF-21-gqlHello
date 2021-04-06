@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const stationSchema = new Schema({
-  Connections: [{type: Schema.Types.ObjectId, ref: 'Connection'}],
+  Connections: [{type: mongoose.Types.ObjectId, ref: 'Connection'}],
   Title: String,
   Town: String,
   AddressLine1: String,

@@ -2,8 +2,9 @@ import {gql} from 'apollo-server-express';
 
 export default gql`
   extend type Query {
-    stations(bounds: [String], start: Int, limit: Int): [Station]
+    stations(bounds: Bounds, start: Int, limit: Int): [Station]
     station(id: ID!): Station
+    addStation: Station
   }
 
   type Station {
@@ -13,11 +14,39 @@ export default gql`
     AddressLine1: String
     StateOrProvince: String
     Postcode: String
-    Location: Location
+    Location: PointObject
     Connections: [Connection]
   }
+
+  input Bounds {
+    _southWest: LatLng
+    _northEast: LatLng
+  }
+
+  input LatLng {
+    lat: Float
+    lng: Float
+  }
+
+  type PointObject {
+    coordinates: [Float]
+    type: String
+  }
+
+  input PointObjectInput {
+    coordinates: [Float]
+  }
+
   extend type Mutation {
-    addStation(stationName: String!, Connections: [ID!]): Station
+    addStation(
+      Title: String!
+      Connections: [ConnectionInput]
+      AddressLine1: String
+      Town: String
+      StateOrProvince: String
+      Postcode: String
+      Location: [PointObjectInput]
+    ): Station
     deleteStation(id: ID!): Station
   }
 `;
