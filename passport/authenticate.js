@@ -12,7 +12,7 @@ const login = (req, res) => {
         try {
           console.log('controller info', info);
           if (err || !user) {
-            teject(info.message);
+            reject(info.message);
           }
           req.login(user, {session: false}, async (err) => {
             if (err) {
