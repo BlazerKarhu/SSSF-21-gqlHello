@@ -7,6 +7,16 @@ import connectMongo from './db/db.js';
 
 dotenv.config();
 
+const checkAuth = (req, res) => {
+  return new Promise((resolve, reject) => {
+    const user = {
+      username: 'tester',
+    };
+    //const user = false;
+    resolve(user);
+  });
+};
+
 (async () => {
   try {
     const conn = await connectMongo();
@@ -17,6 +27,15 @@ dotenv.config();
     const server = new ApolloServer({
       typeDefs: schemas,
       resolvers,
+      context: async ({req, res}) => {
+        const user = await checkAuth(req, res);
+        console.log('app', user);
+        return {
+          req,
+          res,
+          user,
+        };
+      },
     });
 
     const app = express();
