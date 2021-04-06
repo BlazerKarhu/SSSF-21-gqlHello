@@ -9,10 +9,10 @@ dotenv.config();
 
 const checkAuth = (req, res) => {
   return new Promise((resolve, reject) => {
-    const user = {
+    /*const user = {
       username: 'tester',
-    };
-    //const user = false;
+    };*/
+    const user = false;
     resolve(user);
   });
 };
