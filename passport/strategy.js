@@ -1,8 +1,8 @@
 'use strict';
 import passport from 'passport';
 import {Strategy} from 'passport-local';
-// const bcrypt = require('bcrypt');
-// const userModel = require('../models/user');
+import bcrypt from 'bcrypt';
+// import userModel from '../models/user.js';
 import passportJWT from 'passport-jwt';
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
