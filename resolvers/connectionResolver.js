@@ -1,10 +1,7 @@
 import Connection from '../models/connection.js';
 
 export default {
-  Station: {
-    Connections(parent) {
-      console.log('Connections log', parent);
-      return Connection.findById(parent.connection);
-    },
+  Query: {
+    connections: () => Connection.find(),
   },
 };

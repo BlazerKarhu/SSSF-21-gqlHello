@@ -2,7 +2,7 @@ import {gql} from 'apollo-server-express';
 
 export default gql`
   extend type Query {
-    connectionTypes: [ConnectionType]
+    connectiontypes: [ConnectionType]
   }
   type ConnectionType {
     id: ID

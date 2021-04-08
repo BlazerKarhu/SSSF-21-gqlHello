@@ -25,7 +25,7 @@ export default {
           }).populate({
             path: 'Connections',
             populate: [
-              {path: 'ConnectionType'}, //weird problem with this line. should work as ConnectionTypeID but does not.
+              {path: 'ConnectionTypeID'}, //weird problem with this line. should work as ConnectionTypeID but does not.
               {path: 'CurrentTypeID'},
               {path: 'LevelID'},
             ],
@@ -37,7 +37,7 @@ export default {
             .populate({
               path: 'Connections',
               populate: [
-                {path: 'ConnectionType'}, //weird problem with this line. should work as ConnectionTypeID but does not.
+                {path: 'ConnectionTypeID'}, //weird problem with this line. should work as ConnectionTypeID but does not.
                 {path: 'CurrentTypeID'},
                 {path: 'LevelID'},
               ],
@@ -51,7 +51,7 @@ export default {
       return Station.findById(args.id).populate({
         path: 'Connections',
         populate: {
-          path: 'ConnectionType CurrentTypeID LevelID',
+          path: 'ConnectionTypeID CurrentTypeID LevelID',
         },
       });
     },
