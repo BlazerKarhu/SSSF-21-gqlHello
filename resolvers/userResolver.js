@@ -14,7 +14,7 @@ export default {
           token: authResponse.token,
         };
       } catch (error) {
-        throw new AuthenticationError(error.message);
+        throw new AuthenticationError('Invalid credentials');
       }
     },
   },

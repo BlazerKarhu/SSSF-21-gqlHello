@@ -1,21 +1,15 @@
+'use strict';
 import {ApolloServer} from 'apollo-server-express';
 import schemas from './schemas/index.js';
 import resolvers from './resolvers/index.js';
 import express from 'express';
 import dotenv from 'dotenv';
 import connectMongo from './db/db.js';
+import {checkAuth} from './passport/authenticate.js';
+import localhost from './sec/localhost.js';
+import production from './sec/production.js';
 
 dotenv.config();
-
-const checkAuth = (req, res) => {
-  return new Promise((resolve, reject) => {
-    /*const user = {
-      username: 'tester',
-    };*/
-    const user = false;
-    resolve(user);
-  });
-};
 
 (async () => {
   try {
@@ -42,12 +36,19 @@ const checkAuth = (req, res) => {
 
     server.applyMiddleware({app});
 
-    app.listen({port: 3000}, () =>
+    process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+    if (process.env.NODE_ENV === 'production') {
+      production(app, 3000);
+    } else {
+      localhost(app, 8000, 3000);
+    }
+
+    /*app.listen({port: 3000}, () =>
       console.log(
         `🚀 Server ready at http://localhost:3000${server.graphqlPath}ql`
       )
-    );
+    );*/
   } catch (e) {
-    console.log('server error: ' + e.message);
+    console.error('server error: ' + e.message);
   }
 })();
