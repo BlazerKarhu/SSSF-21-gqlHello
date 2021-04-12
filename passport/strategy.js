@@ -2,7 +2,7 @@
 import passport from 'passport';
 import {Strategy} from 'passport-local';
 import bcrypt from 'bcrypt';
-// import userModel from '../models/user.js';
+import userModel from '../models/user.js';
 import passportJWT from 'passport-jwt';
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
@@ -12,7 +12,7 @@ passport.use(
   new Strategy(async (username, password, done) => {
     console.log(username, password);
     try {
-      /* const user = await userModel.findOne({username});
+      const user = await userModel.findOne({username});
       console.log('Local strategy', user);
       if (user === null) {
         return done(null, false, {message: 'Incorrect email.'});
@@ -20,16 +20,16 @@ passport.use(
       const validate = await bcrypt.compare(password, user.password);
       if (!validate) {
         return done(null, false, {message: 'Incorrect password.'});
-      } */
+      }
 
-      // const strippedUser = user.toObject();
-      // delete strippedUser.password;
-      // console.log('deleted pwd', strippedUser);
+      const strippedUser = user.toObject();
+      delete strippedUser.password;
+      console.log('deleted pwd', strippedUser);
 
-      if (username !== 'foo' || password !== 'bar') {
+      /* if (username !== 'foo' || password !== 'bar') {
         return done(null, false, {message: 'Incorrect credentials.'});
       }
-      const strippedUser = {id: 1, username: 'foo'};
+      const strippedUser = {id: 1, username: 'foo'};*/
       return done(null, strippedUser, {message: 'Logged In Successfully'});
     } catch (err) {
       return done(err);
@@ -48,11 +48,11 @@ passport.use(
       console.log('payload', jwtPayload);
       //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
       try {
-        /*const user = await userModel.findById(jwtPayload._id, '-password -__v');
-        console.log('pl user', user);*/
+        const user = await userModel.findById(jwtPayload._id, '-password -__v');
+        console.log('pl user', user);
 
-        let user = null;
-        if (jwtPayload.username === 'foo') user = {id: 1, username: 'foo'};
+        //let user = null;
+        //if (jwtPayload.username === 'foo') user = {id: 1, username: 'foo'};
 
         if (user !== null) {
           return done(null, user);
