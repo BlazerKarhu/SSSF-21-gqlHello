@@ -79,7 +79,7 @@ export default {
         console.error(error);
       }
     },
-    deleteStation: (parent, args) => {
+    deleteStation: (parent, args, {user}) => {
       if (!user) {
         throw new AuthenticationError('You are not authenticated');
       }
