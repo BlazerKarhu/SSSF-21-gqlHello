@@ -8,7 +8,10 @@ export default {
     },
   },
   Mutation: {
-    addCategory: (parent, args) => {
+    addCategory: (parent, args, {user}) => {
+      if (!user) {
+        throw new AuthenticationError('You are not authenticated');
+      }
       console.log('categoryResolver, addCategory', args);
       const newCategory = new Category(args);
       return newCategory.save();
