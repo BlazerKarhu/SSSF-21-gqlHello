@@ -1,11 +1,17 @@
 import {AuthenticationError} from 'apollo-server-errors';
 import {login} from '../passport/authenticate.js';
+import bcrypt from 'bcrypt';
+import User from '../models/user.js';
 
 export default {
   Query: {
+    users: async (parent, args, {user}) => {
+      return User.find();
+    },
     user: async (parent, args, {user}) => {
       console.log('userResolver', user);
       // find user by id
+      return User.findById(args.id);
     },
     login: async (parent, args, {req, res}) => {
       // inject username and password to req.body for passport
