@@ -51,6 +51,11 @@ dotenv.config();
         `🚀 Server ready at http://localhost:3000${server.graphqlPath}ql`
       );
     } else {
+      app.use(
+        helmet({
+          contentSecurityPolicy: false, // graphql playground makes external call e.g. to https://cdn.jsdelivr.net/
+        })
+      );
       localhost(app, 8000, 3000);
       console.log(
         `🚀 Server ready at http://localhost:3000${server.graphqlPath}ql`
