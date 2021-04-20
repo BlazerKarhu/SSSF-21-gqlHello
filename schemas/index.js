@@ -1,6 +1,3 @@
-import animalSchema from './animalSchema.js';
-import categorySchema from './categorySchema.js';
-import speciesSchema from './speciesSchema.js';
 import {gql} from 'apollo-server-express';
 import userSchema from './userSchema.js';
 import stationSchema from './stationSchema.js';
@@ -20,9 +17,6 @@ const linkSchema = gql`
 
 export default [
   linkSchema,
-  animalSchema,
-  categorySchema,
-  speciesSchema,
   userSchema,
   stationSchema,
   connectionSchema,
