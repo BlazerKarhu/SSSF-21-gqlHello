@@ -22,8 +22,6 @@ dotenv.config();
     const server = new ApolloServer({
       typeDefs: schemas,
       resolvers,
-      introspection: true,
-      playground: true,
       context: async ({req, res}) => {
         const user = await checkAuth(req, res);
         console.log('app', user);
